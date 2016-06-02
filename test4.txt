@@ -1,0 +1,12 @@
+int n
+int sum
+int limit
+
+input limit
+
+while(n < limit)
+{
+	n = n + 1
+	sum = sum + n
+	output sum
+}
