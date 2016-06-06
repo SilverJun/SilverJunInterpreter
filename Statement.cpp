@@ -16,7 +16,10 @@ void CStatement::Execute(SymbolTable &context)
 
 void CStatement::Expect(TokenID Expected, const Token &NowToken)
 {
+#ifdef _DEBUG
 	std::cout << "Statement Token : " << NowToken.name << std::endl;
+#endif
+
 	if (Expected != NowToken.token)
 		throw(Error(std::string("StatementError : " + NowToken.name)));
 }

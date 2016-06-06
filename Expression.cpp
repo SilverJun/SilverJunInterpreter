@@ -7,11 +7,12 @@
 
 void CExpression::Expect(TokenID Expected, const Token &NowToken)
 {
+#ifdef _DEBUG
 	std::cout << "Expression Token : " << NowToken.name << std::endl;
+#endif
+
 	if (Expected != NowToken.token)
-	{
 		throw (Error(std::string("SyntaxError : ") + NowToken.name));
-	}
 }
 
 CExpression::ExprPtr CExpression::Parse(tokenItor &it)

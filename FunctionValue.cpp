@@ -19,7 +19,6 @@ void FunctionValue::Create(tokenItor &itor)
 {
 	while (itor->token != End)
 		statements.push_back(StatementPtr(CStatement::Create(itor)));
-	std::cout << "ÇÔ¼ö ³¡" << std::endl;
 }
 
 

@@ -11,6 +11,7 @@ func factorial(int n)->int
 func main()->int
 {
 	output factorial(5)
+	output "\n"
 
 	return 0
 }
