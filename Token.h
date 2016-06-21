@@ -6,6 +6,7 @@
 enum TokenID			//토큰 열거형
 {
 	If = 250,
+	Else, 
 	While,
 	For,
 	To,
@@ -35,6 +36,8 @@ enum TokenID			//토큰 열거형
 	Assignment = '=',
 	Begin = '{',
 	End = '}',
+	ArrayOpen = '[',
+	ArrayClose = ']',
 	Quotmark = '"',
 	Plus = '+',
 	Minus = '-',

@@ -2,9 +2,11 @@
 #include "VM.h"
 
 #include "Error.h"
+#include "StringPool.h"
 
 VM::VM()
 {
+	
 }
 
 

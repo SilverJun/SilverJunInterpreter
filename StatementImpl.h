@@ -16,7 +16,8 @@ public:
 
 private:
 	CExpression::ExprPtr m_expression;			//if m_expression
-	StatementPtr m_statement;					//{m_statement}
+	StatementPtr ifStatement;					//{m_statement}
+	StatementPtr elseStatement;					//{m_statement}
 };
 
 class CWhileStatement : public CStatement

@@ -8,18 +8,26 @@
 
 // CIfStatement
 
-CIfStatement::CIfStatement(tokenItor &itor)
+CIfStatement::CIfStatement(tokenItor &itor) : ifStatement(nullptr), elseStatement(nullptr)
 {
 	Expect(If, *itor++);
 	m_expression = CExpression::Parse(itor);
-	m_statement = StatementPtr(CStatement::Create(itor));
+	ifStatement = StatementPtr(CStatement::Create(itor));
+	
+	if (itor->token == Else)
+	{
+		itor++;
+		elseStatement = StatementPtr(CStatement::Create(itor));
+	}
 }
 
 void CIfStatement::Execute(SymbolTable &context)
 {
 	int result = operator==(m_expression->Evaluate(context), Value(vInt, true)).intValue;
 	if (result)
-		m_statement->Execute(context);
+		ifStatement->Execute(context);
+	else if (elseStatement != nullptr)
+		elseStatement->Execute(context);
 }
 
 // CWhileStatement
@@ -82,7 +90,7 @@ void COutputStatement::Execute(SymbolTable &context)
 		std::cout << value.floatValue;
 		break;
 	case vString:
-		std::cout << value.stringValue->c_str();
+		std::cout << *value.stringValue;
 		break;
 	default:
 		throw Error(std::string("Output Unexpected Object"));

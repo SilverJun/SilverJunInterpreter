@@ -2,7 +2,8 @@
 #include "Program.h"
 #include "Error.h"
 
-
+#include "State.h"
+#include "StringPool.h"
 
 Program::Program(std::string filename)
 {
@@ -32,6 +33,7 @@ Program::~Program()
 
 int Program::Run()
 {
+	CStringPool::GetInstance();
 	g_State->programState = eState::eLexicalAnalyzing;
 	lexer.RegisterCode(code);
 	lexer.LexicalAnalysis(tokenlist);

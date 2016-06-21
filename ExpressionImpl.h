@@ -6,6 +6,7 @@
 #include "FunctionValue.h"
 
 #include "State.h"
+#include "StringPool.h"
 
 class CMultExp : public CExpression			//곱셈처리
 {
@@ -87,11 +88,15 @@ private:
 class CStringAtom : public CAtom			//문자열 표현식.
 {
 public:
-	CStringAtom(std::string str) : m_string(vString, str) {}
-	virtual Value Evaluate(SymbolTable &context) { return m_string; }
-
+	CStringAtom(std::string str) : stringData(vString), stringRef(g_StringPool->AddConstString(str)) {}
+	virtual Value Evaluate(SymbolTable &context)
+	{ 
+		stringData.stringValue = g_StringPool->GetConstString(stringRef);
+		return stringData;
+	}
 private:
-	Value m_string;
+	const int stringRef;
+	Value stringData;
 };
 
 class CIdentifier : public CAtom			//변수호출

@@ -6,8 +6,6 @@
 #include "Paser.h"
 #include "VM.h"
 
-#include "State.h"
-
 #include "Statement.h"
 
 class Program

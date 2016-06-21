@@ -10,13 +10,12 @@ int main(int argc, char* argv[])
 {
 	//if (argc == 1)
 	//{
-	//	cout << "사용법 : 실행파일.exe <파일명>" << endl;
+	//	std::cout << "사용법 : 실행파일.exe <파일명>" << std::endl;
 	//	return -1;
 	//}
+	//Program * Interpreter = new Program(argv[1]);
 
-	//Program * Program = new Program(argv[1]);
-
-	Program* Interpreter = new Program("./test6.txt");
+	Program* Interpreter = new Program("./test.txt");
 
 	int result = Interpreter->Run();
 

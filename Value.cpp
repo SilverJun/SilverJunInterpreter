@@ -30,7 +30,7 @@ Value operator+(const Value lhs, const Value rhs)
 	case ValueType::vString:
 		if (rhs.valueType == vString)
 		{
-			return Value(vString, (*lhs.stringValue + *rhs.stringValue));
+			return Value(vString, std::string(*lhs.stringValue + *rhs.stringValue));
 		}
 		else
 		{

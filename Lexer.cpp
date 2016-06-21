@@ -15,6 +15,7 @@ static const Keyword KeyWordTokens[] =
 	{ To, "to" },
 	{ Step, "step" },
 	{ If, "if" },
+	{ Else, "else"},
 	{ Int, "int" },
 	{ Float, "float" },					//미구현
 	{ String, "string" },					//미구현
@@ -232,7 +233,7 @@ void Lexer::PasingToken(tokenList &TokenList, std::string::iterator begin, std::
 			TokenList.push_back(Token(CloseBracket, ")"));
 			break;
 		case Plus:
-			if (itor != end && TokenTable[*(itor + 1)] == '+')
+			if (itor != end && TokenTable[*std::next(itor)] == '+')
 			{
 				TokenList.push_back(Token(Increment, "++"));
 				itor++;
@@ -243,12 +244,12 @@ void Lexer::PasingToken(tokenList &TokenList, std::string::iterator begin, std::
 			}
 			break;
 		case Minus:
-			if (itor != end && TokenTable[*(itor + 1)] == '-')
+			if (itor != end && TokenTable[*std::next(itor)] == '-')
 			{
 				TokenList.push_back(Token(Decrement, "--"));
 				itor++;
 			}
-			else if (itor != end && TokenTable[*(itor + 1)] == '>')
+			else if (itor != end && TokenTable[*std::next(itor)] == '>')
 			{
 				TokenList.push_back(Token(ReturnType, "->"));
 				itor++;
@@ -262,7 +263,7 @@ void Lexer::PasingToken(tokenList &TokenList, std::string::iterator begin, std::
 			TokenList.push_back(Token(Multi, "*"));
 			break;
 		case Divide:
-			if (itor != end && TokenTable[*(itor + 1)] == '/')		//주석인지 나누기 연산자인지 판별
+			if (itor != end && TokenTable[*std::next(itor)] == '/')		//주석인지 나누기 연산자인지 판별
 				return;//주석이면 문장끝까지 다 생략
 			else
 				TokenList.push_back(Token(Divide, "/"));
@@ -271,7 +272,7 @@ void Lexer::PasingToken(tokenList &TokenList, std::string::iterator begin, std::
 			TokenList.push_back(Token(Mod, "%"));
 			break;
 		case Not:
-			if (itor != end && TokenTable[*(itor + 1)] == '=')				// !이 되거나 !=이 될 수 있으므로 검사.
+			if (itor != end && TokenTable[*std::next(itor)] == '=')				// !이 되거나 !=이 될 수 있으므로 검사.
 			{
 				TokenList.push_back(Token(NotEqual, "!="));
 				itor++;
@@ -282,7 +283,7 @@ void Lexer::PasingToken(tokenList &TokenList, std::string::iterator begin, std::
 			}
 			break;
 		case Great:
-			if (itor != end && TokenTable[*(itor + 1)] == '=')
+			if (itor != end && TokenTable[*std::next(itor)] == '=')
 			{
 				TokenList.push_back(Token(GreatEqual, ">="));
 				itor++;
@@ -293,7 +294,7 @@ void Lexer::PasingToken(tokenList &TokenList, std::string::iterator begin, std::
 			}
 			break;
 		case Less:
-			if (itor != end && TokenTable[*(itor + 1)] == '=')
+			if (itor != end && TokenTable[*std::next(itor)] == '=')
 			{
 				TokenList.push_back(Token(LessEqual, "<="));
 				itor++;
@@ -304,7 +305,7 @@ void Lexer::PasingToken(tokenList &TokenList, std::string::iterator begin, std::
 			}
 			break;
 		case Or:
-			if (itor != end && TokenTable[*(itor + 1)] == '|')
+			if (itor != end && TokenTable[*std::next(itor)] == '|')
 			{
 				//throw(Error(std::string("Unexpected Token : ") + '|'));
 			}
@@ -315,7 +316,7 @@ void Lexer::PasingToken(tokenList &TokenList, std::string::iterator begin, std::
 			}
 			break;
 		case And:
-			if (itor != end && TokenTable[*(itor + 1)] == '&')
+			if (itor != end && TokenTable[*std::next(itor)] == '&')
 			{
 				//throw(Error(std::string("Unexpected Token : ") + '&'));
 			}
@@ -326,7 +327,7 @@ void Lexer::PasingToken(tokenList &TokenList, std::string::iterator begin, std::
 			}
 			break;
 		case Assignment:
-			if (itor != end && TokenTable[*(itor + 1)] == '=')
+			if (itor != end && TokenTable[*std::next(itor)] == '=')
 			{
 				TokenList.push_back(Token(Equal, "=="));
 				itor++;
